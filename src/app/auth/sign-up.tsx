@@ -1,3 +1,3 @@
-import { SignUpScreen } from '@/components/auth/sign-up-screen';
+import { SignUpScreen } from '@/features/auth';
 
 export default SignUpScreen;

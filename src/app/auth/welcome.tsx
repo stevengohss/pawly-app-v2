@@ -1,3 +1,3 @@
-import { WelcomeScreen } from '@/components/auth/welcome-screen';
+import { WelcomeScreen } from '@/features/auth';
 
 export default WelcomeScreen;

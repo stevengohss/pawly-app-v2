@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Pawly V2",
+    "slug": "pawly-v2",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "pawly-v2",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

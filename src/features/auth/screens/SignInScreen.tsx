@@ -5,7 +5,7 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 import {
   EmailInputIcon,
   InputField,
-} from '@/components/ui/InputField';
+} from '@/components/forms/InputField';
 import { AuthFooter } from '@/features/auth/components/AuthFooter';
 import { AuthScreenLayout } from '@/features/auth/components/AuthScreenLayout';
 import { TrustCompliance } from '@/features/auth/components/TrustCompliance';

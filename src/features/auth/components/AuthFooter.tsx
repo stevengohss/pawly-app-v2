@@ -6,8 +6,8 @@ import {
   type LayoutChangeEvent,
 } from 'react-native';
 
-import { FooterCTA } from '@/components/layout/FooterCTA';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/actions/Button';
+import { FooterCTA } from '@/components/navigation/FooterCTA';
 import { en } from '@/i18n/en';
 import { authTokens } from '@/theme/authTokens';
 

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, type LayoutChangeEvent } from 'react-native';
 
-import { FooterCTA } from '@/components/layout/FooterCTA';
-import { Button } from '@/components/ui/Button';
-import { ProgressIndicator } from '@/components/ui/ProgressIndicator';
+import { Button } from '@/components/actions/Button';
+import { FooterCTA } from '@/components/navigation/FooterCTA';
+import { ProgressIndicator } from '@/components/navigation/ProgressIndicator';
 import { pawlyTokens } from '@/theme/pawlyTokens';
 
 type IntroFooterProps = {

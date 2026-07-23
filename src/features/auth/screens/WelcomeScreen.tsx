@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PageHeader } from '@/components/layout/PageHeader';
+import { PageHeader } from '@/components/navigation/PageHeader';
 import { AuthFooter } from '@/features/auth/components/AuthFooter';
 import { WelcomeFeatureHighlights } from '@/features/auth/components/WelcomeFeatureHighlights';
 import { en } from '@/i18n/en';

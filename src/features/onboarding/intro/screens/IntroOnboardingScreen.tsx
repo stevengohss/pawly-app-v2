@@ -17,7 +17,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PageHeader } from '@/components/layout/PageHeader';
+import { PageHeader } from '@/components/navigation/PageHeader';
 import { IntroFooter } from '@/features/onboarding/intro/components/IntroFooter';
 import { IntroHero } from '@/features/onboarding/intro/components/IntroHero';
 import {

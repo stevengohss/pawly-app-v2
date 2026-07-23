@@ -19,7 +19,9 @@ type ButtonProps = {
   label: string;
   loading?: boolean;
   onPress: () => void;
+  showArrow?: boolean;
   style?: StyleProp<ViewStyle>;
+  variant?: 'primary' | 'secondary';
 };
 
 export function Button({
@@ -28,7 +30,9 @@ export function Button({
   label,
   loading,
   onPress,
+  showArrow = true,
   style,
+  variant = 'primary',
 }: ButtonProps) {
   return (
     <Pressable
@@ -44,6 +48,7 @@ export function Button({
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
+        variant === 'secondary' && styles.secondaryButton,
         style,
         pressed && styles.pressed,
         (disabled || loading) && styles.disabled,
@@ -53,15 +58,29 @@ export function Button({
         <ActivityIndicator color={pawlyTokens.color.onAction} size="small" />
       ) : (
         <>
-          <Text style={styles.label}>{label}</Text>
-          <View accessibilityElementsHidden style={styles.arrow}>
-            <ArrowLine height={1.5} style={styles.arrowLine} width={14.083} />
-            <ArrowChevron
-              height={11.5}
-              style={styles.arrowChevron}
-              width={6.5}
-            />
-          </View>
+          <Text
+            numberOfLines={1}
+            style={[
+              styles.label,
+              variant === 'secondary' && styles.secondaryLabel,
+            ]}
+          >
+            {label}
+          </Text>
+          {showArrow ? (
+            <View accessibilityElementsHidden style={styles.arrow}>
+              <ArrowLine
+                height={1.5}
+                style={styles.arrowLine}
+                width={14.083}
+              />
+              <ArrowChevron
+                height={11.5}
+                style={styles.arrowChevron}
+                width={6.5}
+              />
+            </View>
+          ) : null}
         </>
       )}
     </Pressable>
@@ -100,6 +119,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 20.48,
     letterSpacing: 0.08,
+  },
+  secondaryButton: {
+    borderColor: '#ffffff',
+    backgroundColor: '#ffffff',
+    ...Platform.select({
+      web: {
+        boxShadow: 'none',
+      },
+      default: {
+        shadowOpacity: 0,
+        elevation: 0,
+      },
+    }),
+  },
+  secondaryLabel: {
+    color: '#99462a',
+    fontFamily: pawlyTokens.font.jakartaRegular,
+    lineHeight: 24,
   },
   arrow: {
     width: 20,

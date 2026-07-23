@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import {
   Pressable,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
@@ -9,7 +10,7 @@ import BackArrow from '../../../assets/figma/navigation/back-arrow.svg';
 import { PawlyWordmark } from '@/components/brand/PawlyWordmark';
 import { pawlyTokens } from '@/theme/pawlyTokens';
 
-type PageHeaderProps = {
+type BrandPageHeaderProps = {
   appName: string;
   backgroundColor?: string;
   backAccessibilityLabel: string;
@@ -18,18 +19,52 @@ type PageHeaderProps = {
   rightAction?: ReactNode;
   sideOffsetY?: number;
   sideSlotWidth?: number;
+  variant?: 'brand';
+};
+
+type ContextualPageHeaderProps = {
+  backgroundColor?: string;
+  leading: ReactNode;
+  rightActions?: ReactNode;
+  title: string;
+  variant: 'contextual';
 };
 
 export function PageHeader({
-  appName,
-  backgroundColor = pawlyTokens.color.page,
-  backAccessibilityLabel,
-  centerAlignment = 'center',
-  onBack,
-  rightAction,
-  sideOffsetY = 0,
-  sideSlotWidth = 59,
-}: PageHeaderProps) {
+  ...props
+}: BrandPageHeaderProps | ContextualPageHeaderProps) {
+  if (props.variant === 'contextual') {
+    const {
+      backgroundColor = pawlyTokens.color.page,
+      leading,
+      rightActions,
+      title,
+    } = props;
+
+    return (
+      <View style={[styles.contextualHeader, { backgroundColor }]}>
+        <View style={styles.contextualTitle}>
+          {leading}
+          <Text numberOfLines={1} style={styles.titleText}>
+            {title}
+          </Text>
+        </View>
+        <View style={styles.contextualActions}>{rightActions}</View>
+      </View>
+    );
+  }
+
+  const {
+    appName,
+    backgroundColor = pawlyTokens.color.page,
+    backAccessibilityLabel,
+    centerAlignment = 'center',
+    onBack,
+    rightAction,
+    sideOffsetY = 0,
+    sideSlotWidth = 59,
+  } = props;
+
   return (
     <View style={[styles.header, { backgroundColor }]}>
       <View
@@ -116,5 +151,33 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.65,
+  },
+  contextualHeader: {
+    width: '100%',
+    height: 56,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingHorizontal: 16,
+  },
+  contextualTitle: {
+    minWidth: 0,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  contextualActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  titleText: {
+    flexShrink: 1,
+    color: pawlyTokens.color.heading,
+    fontFamily: pawlyTokens.font.quicksandSemiBold,
+    fontSize: 28,
+    fontWeight: '600',
+    lineHeight: 37.24,
   },
 });

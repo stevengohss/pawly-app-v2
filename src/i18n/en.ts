@@ -5,6 +5,66 @@ export const en = {
     terms: 'Terms of Service',
     privacy: 'Privacy Policy',
   },
+  home: {
+    header: {
+      title: 'Welcome',
+    },
+    quickActions: {
+      meds: 'Meds',
+      medsDetail: '2 Due Today',
+      feeding: 'Feeding',
+      feedingDetail: 'Cooper fed 2h ago',
+    },
+    care: {
+      heading: 'Today’s Care',
+      date: 'Oct 24, 2023',
+      walkTitle: 'Morning Walk',
+      walkDetail: '08:30 AM • 30 mins',
+      medicationTitle: 'Heartworm Pill',
+      medicationDetail: 'Completed 07:45 AM',
+      vetTitle: 'Vet Checkup',
+      vetDetail: '04:15 PM • Downtown Clinic',
+    },
+    insight: {
+      badge: 'Smart Insight',
+      heading: "Cooper's activity is up 15% this week!",
+      body:
+        'Keep up the great work! That extra evening walk is making a difference in his sleep quality.',
+      action: 'See Analysis',
+    },
+    navigation: {
+      home: 'Home',
+      moments: 'Moments',
+      add: 'Add',
+      care: 'Care',
+      explore: 'Explore',
+    },
+    alerts: {
+      title: 'Coming in a later stage',
+      profile: 'Profile and pet switching are not available yet.',
+      search: 'Home search is not available yet.',
+      notifications: 'Notifications are not available yet.',
+      meds: 'Medication details are not available yet.',
+      feeding: 'Feeding details are not available yet.',
+      task: 'Care task updates are not available yet.',
+      insight: 'Insight analysis is not available yet.',
+      add: 'Pawly Quick Actions are not available yet.',
+      moments: 'Moments will be implemented in a later stage.',
+      care: 'Care will be implemented in a later stage.',
+      explore: 'Explore will be implemented in a later stage.',
+    },
+    accessibility: {
+      avatar: 'Open profile and pet switcher',
+      search: 'Search',
+      notifications: 'Notifications',
+      meds: 'Open medication summary',
+      feeding: 'Open feeding summary',
+      walk: 'Update Morning Walk',
+      medication: 'Open completed Heartworm Pill',
+      vet: 'Open Vet Checkup',
+      insight: 'See activity analysis',
+    },
+  },
   auth: {
     welcome: {
       heading: 'Welcome to Pawly',
@@ -78,9 +138,6 @@ export const en = {
       checkEmailTitle: 'Check your email',
       checkEmail:
         'Your account was created. Confirm your email, then return to Pawly to sign in.',
-      authenticatedTitle: 'Authentication successful',
-      authenticated:
-        'Your session is ready. Home will replace this temporary Stage 2 handoff in Stage 3.',
       confirm: 'OK',
     },
     accessibility: {

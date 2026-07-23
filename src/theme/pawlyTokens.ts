@@ -12,6 +12,7 @@ export const pawlyTokens = {
     onAction: '#faf9f6',
   },
   font: {
+    quicksandRegular: 'Quicksand_400Regular',
     quicksandSemiBold: 'Quicksand_600SemiBold',
     jakartaRegular: 'PlusJakartaSans_400Regular',
     jakartaMedium: 'PlusJakartaSans_500Medium',

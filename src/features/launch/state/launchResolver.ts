@@ -38,10 +38,7 @@ export function resolveLaunchRoute(
     return onboardingRoute(state.introStep);
   }
 
-  return {
-    pathname: '/auth/welcome' as const,
-    params: hasSession ? { authenticatedFallback: '1' } : {},
-  } as Href;
+  return (hasSession ? '/home' : '/auth/welcome') as Href;
 }
 
 export function isDevelopmentScenarioActive() {

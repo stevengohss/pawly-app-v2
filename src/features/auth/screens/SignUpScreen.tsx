@@ -67,10 +67,7 @@ export function SignUpScreen() {
       const result = await signUpWithEmail({ email, fullName, password });
 
       if (result.status === 'authenticated') {
-        router.replace({
-          pathname: '/auth/welcome',
-          params: { authenticatedFallback: '1' },
-        });
+        router.replace('/home');
         return;
       }
 

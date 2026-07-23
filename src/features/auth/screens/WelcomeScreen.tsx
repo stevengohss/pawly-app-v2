@@ -1,10 +1,9 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
-  Alert,
   Platform,
   ScrollView,
   StyleSheet,
@@ -25,30 +24,12 @@ const welcomeBackground = require('../../../../assets/figma/auth/welcome-backgro
 
 export function WelcomeScreen() {
   const router = useRouter();
-  const { authenticatedFallback } = useLocalSearchParams<{
-    authenticatedFallback?: string;
-  }>();
   const insets = useSafeAreaInsets();
   const { height, width } = useWindowDimensions();
   const safeTop = Platform.OS === 'web' ? authTokens.screen.safeTop : insets.top;
   const [footerHeight, setFooterHeight] = useState<number>(
     authTokens.screen.footerHeight,
   );
-  const hasShownFallback = useRef(false);
-
-  useEffect(() => {
-    if (authenticatedFallback !== '1' || hasShownFallback.current) {
-      return;
-    }
-
-    hasShownFallback.current = true;
-    Alert.alert(
-      en.auth.alerts.authenticatedTitle,
-      en.auth.alerts.authenticated,
-    );
-    router.setParams({ authenticatedFallback: undefined });
-  }, [authenticatedFallback, router]);
-
   const handleFooterLayout = useCallback((event: LayoutChangeEvent) => {
     const measured = Math.ceil(event.nativeEvent.layout.height);
     setFooterHeight((current) => (current === measured ? current : measured));

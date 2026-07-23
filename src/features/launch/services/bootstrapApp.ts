@@ -4,7 +4,10 @@ import {
   PlusJakartaSans_600SemiBold,
   PlusJakartaSans_700Bold,
 } from '@expo-google-fonts/plus-jakarta-sans';
-import { Quicksand_600SemiBold } from '@expo-google-fonts/quicksand';
+import {
+  Quicksand_400Regular,
+  Quicksand_600SemiBold,
+} from '@expo-google-fonts/quicksand';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
@@ -18,6 +21,7 @@ const careHero = require('../../../../assets/figma/onboarding/intro/care-hero.pn
 const exploreHero = require('../../../../assets/figma/onboarding/intro/explore-hero.png');
 const welcomeBackground = require('../../../../assets/figma/auth/welcome-background.png');
 const petAvatar = require('../../../../assets/figma/auth/pet-avatar.png');
+const homeAvatar = require('../../../../assets/figma/user/home-avatar.jpg');
 
 const minimumDisplayMs = 1_000;
 
@@ -49,6 +53,7 @@ export async function bootstrapApp({
       PlusJakartaSans_500Medium,
       PlusJakartaSans_600SemiBold,
       PlusJakartaSans_700Bold,
+      Quicksand_400Regular,
       Quicksand_600SemiBold,
     }),
     0.34,
@@ -61,6 +66,7 @@ export async function bootstrapApp({
       exploreHero,
       welcomeBackground,
       petAvatar,
+      homeAvatar,
     ]),
     0.54,
   );

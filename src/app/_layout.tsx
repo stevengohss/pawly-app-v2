@@ -4,7 +4,10 @@ import {
   PlusJakartaSans_600SemiBold,
   PlusJakartaSans_700Bold,
 } from '@expo-google-fonts/plus-jakarta-sans';
-import { Quicksand_600SemiBold } from '@expo-google-fonts/quicksand';
+import {
+  Quicksand_400Regular,
+  Quicksand_600SemiBold,
+} from '@expo-google-fonts/quicksand';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -17,6 +20,7 @@ export default function RootLayout() {
     PlusJakartaSans_500Medium,
     PlusJakartaSans_600SemiBold,
     PlusJakartaSans_700Bold,
+    Quicksand_400Regular,
     Quicksand_600SemiBold,
   });
 

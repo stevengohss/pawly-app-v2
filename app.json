@@ -18,7 +18,15 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font",
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FAF9F6"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

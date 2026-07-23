@@ -1,0 +1,29 @@
+export const stageOneTokens = {
+  color: {
+    page: '#faf9f6',
+    heading: '#241c1a',
+    body: '#55433d',
+    caption: '#776964',
+    link: '#9b543e',
+    action: '#d97757',
+    progressActive: '#99462a',
+    progressInactive: '#e9e8e5',
+    loaderTrack: '#e4e3df',
+    onAction: '#faf9f6',
+  },
+  font: {
+    quicksandSemiBold: 'Quicksand_600SemiBold',
+    jakartaRegular: 'PlusJakartaSans_400Regular',
+    jakartaMedium: 'PlusJakartaSans_500Medium',
+    jakartaSemiBold: 'PlusJakartaSans_600SemiBold',
+    jakartaBold: 'PlusJakartaSans_700Bold',
+  },
+  screen: {
+    width: 402,
+    splashHeight: 874,
+    onboardingHeight: 858,
+    safeTop: 54,
+    headerHeight: 110,
+    footerHeight: 156,
+  },
+} as const;

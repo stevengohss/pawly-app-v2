@@ -14,6 +14,7 @@ expo-env.d.ts
 
 # Metro
 .metro-health-check*
+.tmp-stage1-*
 
 # Native credentials and build files
 *.orig.*

@@ -116,14 +116,14 @@ const cardShadow = Platform.select({
 const styles = StyleSheet.create({
   grid: {
     width: '100%',
-    height: 160,
+    height: homeTokens.component.quickActions.height,
     flexDirection: 'row',
     gap: 16,
   },
   card: {
     minWidth: 0,
     flex: 1,
-    height: 160,
+    height: homeTokens.component.quickActions.height,
     overflow: 'hidden',
     justifyContent: 'space-between',
     padding: 24,
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     backgroundColor: homeTokens.color.white,
   },
   iconBackground: {
-    width: 48,
-    height: 48,
+    width: homeTokens.component.quickActions.iconSize,
+    height: homeTokens.component.quickActions.iconSize,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 16,

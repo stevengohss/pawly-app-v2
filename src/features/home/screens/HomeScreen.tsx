@@ -37,6 +37,7 @@ import { useHomeSessionGuard } from '@/features/home/state/useHomeSessionGuard';
 import { en } from '@/i18n/en';
 import { homeTokens } from '@/theme/homeTokens';
 
+const BOTTOM_NAVIGATION_BOTTOM_OFFSET = 10;
 const drawerUserAvatar = require('../../../../assets/figma/user/home-avatar.jpg');
 const drawerPetAvatar = require('../../../../assets/figma/auth/pet-avatar.png');
 
@@ -68,10 +69,10 @@ export function HomeScreen() {
   const insets = useSafeAreaInsets();
   const safeTop =
     Platform.OS === 'web' ? homeTokens.screen.safeTop : insets.top;
-  const safeBottom = Platform.OS === 'web' ? 0 : insets.bottom;
   const headerHeight = safeTop + homeTokens.screen.headerRowHeight;
   const navigationHeight =
-    BOTTOM_NAVIGATION_HEIGHT + safeBottom;
+    BOTTOM_NAVIGATION_HEIGHT +
+    BOTTOM_NAVIGATION_BOTTOM_OFFSET;
   const scrollRef = useRef<ScrollView>(null);
   const avatarRef = useRef<View>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -105,11 +106,6 @@ export function HomeScreen() {
   const headerTranslateY = clampedScroll.interpolate({
     inputRange: [0, headerHeight],
     outputRange: [0, -headerHeight],
-    extrapolate: 'clamp',
-  });
-  const navigationTranslateY = clampedScroll.interpolate({
-    inputRange: [0, headerHeight],
-    outputRange: [0, navigationHeight],
     extrapolate: 'clamp',
   });
   const handleScroll = useMemo(
@@ -236,22 +232,14 @@ export function HomeScreen() {
           />
         </Animated.View>
 
-        <Animated.View
-          style={[
-            styles.navigation,
-            !reduceMotion && {
-              transform: [{ translateY: navigationTranslateY }],
-            },
-          ]}
-        >
+        <View style={styles.navigation}>
           <BottomNavigation
             activeDestination="home"
-            bottomInset={safeBottom}
             labels={en.home.navigation}
             onAddPress={() => handleNavigation('add')}
             onSelect={handleNavigation}
           />
-        </Animated.View>
+        </View>
       </View>
 
       <PawlyDrawer
@@ -295,10 +283,9 @@ const styles = StyleSheet.create({
   },
   contents: {
     width: '100%',
-    maxWidth: homeTokens.screen.referenceWidth,
     gap: homeTokens.screen.contentGap,
     paddingHorizontal: homeTokens.screen.contentHorizontalPadding,
-    paddingVertical: 16,
+    paddingVertical: homeTokens.screen.contentVerticalPadding,
   },
   header: {
     position: 'absolute',
@@ -312,7 +299,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 6,
     right: 0,
-    bottom: 0,
+    bottom: BOTTOM_NAVIGATION_BOTTOM_OFFSET,
     left: 0,
     alignItems: 'center',
   },

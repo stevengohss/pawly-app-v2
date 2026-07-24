@@ -106,7 +106,6 @@ function BellIcon() {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    maxWidth: 402,
     overflow: 'visible',
     backgroundColor: homeTokens.color.page,
     ...Platform.select({

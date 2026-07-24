@@ -43,7 +43,7 @@ export function InsightsTeaser({ onPress }: InsightsTeaserProps) {
 const styles = StyleSheet.create({
   card: {
     width: '100%',
-    height: 272,
+    height: homeTokens.component.insight.height,
     overflow: 'hidden',
     padding: 24,
     borderRadius: 24,
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   button: {
-    width: 142,
-    height: 40,
+    width: homeTokens.component.insight.buttonWidth,
+    height: homeTokens.component.insight.buttonHeight,
     alignSelf: 'flex-start',
     marginTop: 0,
     paddingHorizontal: 20,

@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    maxWidth: 512,
     gap: 8,
   },
   heading: {

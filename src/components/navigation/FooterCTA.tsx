@@ -26,7 +26,12 @@ export function FooterCTA({
       style={[
         styles.footer,
         fixed && styles.fixed,
-        { paddingBottom: Math.max(20, bottomInset) },
+        {
+          paddingBottom: Math.max(
+            pawlyTokens.component.footer.minimumBottomPadding,
+            bottomInset,
+          ),
+        },
       ]}
     >
       {children}
@@ -39,9 +44,9 @@ const styles = StyleSheet.create({
     width: '100%',
     flexShrink: 0,
     alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    gap: pawlyTokens.component.footer.gap,
+    paddingHorizontal: pawlyTokens.component.footer.horizontalPadding,
+    paddingTop: pawlyTokens.component.footer.topPadding,
     backgroundColor: pawlyTokens.color.page,
   },
   fixed: {

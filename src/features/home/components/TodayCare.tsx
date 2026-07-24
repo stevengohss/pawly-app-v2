@@ -158,12 +158,12 @@ const taskShadow = Platform.select({
 const styles = StyleSheet.create({
   section: {
     width: '100%',
-    height: 288,
+    height: homeTokens.component.todayCare.height,
     gap: 16,
   },
   header: {
     width: '100%',
-    height: 32,
+    height: homeTokens.component.todayCare.headerHeight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -183,11 +183,11 @@ const styles = StyleSheet.create({
   },
   tasks: {
     width: '100%',
-    height: 240,
+    height: homeTokens.component.todayCare.listHeight,
   },
   task: {
     width: '100%',
-    height: 80,
+    height: homeTokens.component.todayCare.rowHeight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -206,8 +206,8 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   taskIcon: {
-    width: 48,
-    height: 48,
+    width: homeTokens.component.todayCare.iconSize,
+    height: homeTokens.component.todayCare.iconSize,
     flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
@@ -233,8 +233,8 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   taskAction: {
-    width: 32,
-    height: 32,
+    width: homeTokens.component.todayCare.actionSize,
+    height: homeTokens.component.todayCare.actionSize,
     flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',

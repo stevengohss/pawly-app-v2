@@ -11,6 +11,9 @@ export const authTokens = {
     error: '#b42318',
   },
   font: pawlyTokens.font,
+  component: {
+    inputField: pawlyTokens.component.inputField,
+  },
   screen: {
     width: 402,
     height: 874,

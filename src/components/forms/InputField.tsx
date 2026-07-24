@@ -153,6 +153,12 @@ function EyeIcon() {
   );
 }
 
+const inputFieldTokens = authTokens.component.inputField;
+const inputFieldContentPaddingHorizontal =
+  inputFieldTokens.horizontalPadding - inputFieldTokens.borderWidth;
+const inputFieldContentPaddingVertical =
+  inputFieldTokens.verticalPadding - inputFieldTokens.borderWidth;
+
 const styles = StyleSheet.create({
   field: {
     width: '100%',
@@ -187,14 +193,14 @@ const styles = StyleSheet.create({
   },
   inputFrame: {
     width: '100%',
-    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    paddingHorizontal: 16,
-    borderWidth: 1,
+    gap: inputFieldTokens.gap,
+    paddingHorizontal: inputFieldContentPaddingHorizontal,
+    paddingVertical: inputFieldContentPaddingVertical,
+    borderWidth: inputFieldTokens.borderWidth,
     borderColor: authTokens.color.inputBorder,
-    borderRadius: 8,
+    borderRadius: inputFieldTokens.borderRadius,
     backgroundColor: authTokens.color.inputBackground,
     ...Platform.select({
       web: {
@@ -215,22 +221,19 @@ const styles = StyleSheet.create({
   input: {
     minWidth: 0,
     flex: 1,
-    height: 21,
     alignSelf: 'center',
     padding: 0,
     color: authTokens.color.heading,
     fontFamily: authTokens.font.jakartaRegular,
     fontSize: 14,
-    lineHeight: 21,
     textAlignVertical: 'center',
     ...Platform.select({
-      ios: {
-        transform: [{ translateY: -2 }],
-      },
       android: {
         includeFontPadding: false,
+        lineHeight: 21,
       },
       web: {
+        lineHeight: 21,
         outlineWidth: 0,
       },
     }),
@@ -251,8 +254,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'relative',
-    width: 20,
-    height: 20,
+    width: inputFieldTokens.iconSize,
+    height: inputFieldTokens.iconSize,
   },
   emailEnvelope: {
     position: 'absolute',

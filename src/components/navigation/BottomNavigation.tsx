@@ -31,7 +31,6 @@ type BottomNavigationTab = Exclude<BottomNavigationDestination, 'add'>;
 
 type BottomNavigationProps = {
   activeDestination: BottomNavigationTab;
-  bottomInset: number;
   labels: Record<BottomNavigationDestination, string>;
   onAddPress: () => void;
   onSelect: (destination: BottomNavigationTab) => void;
@@ -58,12 +57,10 @@ const metrics = {
     frameSize: 55,
   },
   item: {
-    activeIconOffset: 4,
     gap: 4,
     height: 75,
-    horizontalPadding: 15,
     iconSize: 24,
-    verticalPadding: 12.5,
+    verticalPadding: 16,
     width: 70,
   },
   menu: {
@@ -74,13 +71,13 @@ const metrics = {
   },
   selectedIndicator: {
     height: 1,
-    top: 11.5,
+    left: 26.5,
+    top: 10,
     width: 17,
   },
   surface: {
     bottomRadius: 26,
     bumpSize: 72,
-    height: BOTTOM_NAVIGATION_HEIGHT,
     rectangleHeight: 75,
     rectangleTop: 32,
     topRadius: 6,
@@ -111,24 +108,16 @@ const navigationItems = {
 
 export function BottomNavigation({
   activeDestination,
-  bottomInset,
   labels,
   onAddPress,
   onSelect,
 }: BottomNavigationProps) {
-  const safeBottom = Math.max(0, bottomInset);
-
   return (
     <View
       accessibilityRole="tablist"
-      style={[
-        styles.container,
-        {
-          height: BOTTOM_NAVIGATION_HEIGHT + safeBottom,
-        },
-      ]}
+      style={styles.container}
     >
-      <NavigationSurface safeBottom={safeBottom} />
+      <NavigationSurface />
 
       <View style={styles.menuRow}>
         <View style={styles.group}>
@@ -186,20 +175,12 @@ export function BottomNavigation({
   );
 }
 
-function NavigationSurface({ safeBottom }: { safeBottom: number }) {
+function NavigationSurface() {
   return (
-    <>
-      <View pointerEvents="none" style={styles.shadowSurface}>
-        <View style={styles.surfaceBump} />
-        <View style={styles.surfaceRectangle} />
-      </View>
-      {safeBottom > 0 ? (
-        <View
-          pointerEvents="none"
-          style={[styles.safeAreaSurface, { height: safeBottom }]}
-        />
-      ) : null}
-    </>
+    <View pointerEvents="none" style={styles.shadowSurface}>
+      <View style={styles.surfaceBump} />
+      <View style={styles.surfaceRectangle} />
+    </View>
   );
 }
 
@@ -231,13 +212,17 @@ function NavItem({
           />
         </View>
       ) : null}
-      <View style={[styles.icon, active && styles.activeIcon]}>
+      <View style={styles.icon}>
         <Icon
           height={metrics.item.iconSize}
           width={metrics.item.iconSize}
         />
       </View>
-      <Text style={[styles.label, active && styles.activeLabel]}>
+      <Text
+        allowFontScaling={false}
+        numberOfLines={1}
+        style={[styles.label, active && styles.activeLabel]}
+      >
         {label}
       </Text>
     </Pressable>
@@ -247,6 +232,7 @@ function NavItem({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: BOTTOM_NAVIGATION_HEIGHT,
     overflow: 'visible',
   },
   shadowSurface: {
@@ -254,7 +240,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    height: metrics.surface.height,
+    height: BOTTOM_NAVIGATION_HEIGHT,
     ...Platform.select({
       web: {
         filter: 'drop-shadow(0 -1px 64px rgba(0,0,0,0.15))',
@@ -290,13 +276,6 @@ const styles = StyleSheet.create({
     borderRadius: metrics.surface.bumpSize / 2,
     backgroundColor: '#ffffff',
   },
-  safeAreaSurface: {
-    position: 'absolute',
-    top: BOTTOM_NAVIGATION_HEIGHT,
-    right: 0,
-    left: 0,
-    backgroundColor: '#ffffff',
-  },
   menuRow: {
     position: 'absolute',
     top: metrics.menu.top,
@@ -319,21 +298,18 @@ const styles = StyleSheet.create({
     width: metrics.item.width,
     height: metrics.item.height,
     alignItems: 'center',
-    paddingHorizontal: metrics.item.horizontalPadding,
     paddingVertical: metrics.item.verticalPadding,
   },
   indicator: {
     position: 'absolute',
     top: metrics.selectedIndicator.top,
+    left: metrics.selectedIndicator.left,
     width: metrics.selectedIndicator.width,
     height: metrics.selectedIndicator.height,
   },
   icon: {
     width: metrics.item.iconSize,
     height: metrics.item.iconSize,
-  },
-  activeIcon: {
-    marginTop: metrics.item.activeIconOffset,
   },
   label: {
     marginTop: metrics.item.gap,
@@ -356,7 +332,7 @@ const styles = StyleSheet.create({
     left: '50%',
     width: metrics.add.frameSize,
     height: metrics.add.frameSize,
-    marginLeft: -(metrics.add.frameSize / 2),
+    marginLeft: -(metrics.add.frameSize / 2) + 0.5,
     overflow: 'visible',
   },
   addArtwork: {

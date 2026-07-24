@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
   },
   copy: {
     width: '100%',
-    maxWidth: 512,
     alignItems: 'center',
     gap: 8,
   },

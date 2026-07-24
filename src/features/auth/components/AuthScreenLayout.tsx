@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
-  KeyboardAvoidingView,
+  Keyboard,
   Platform,
   ScrollView,
   StyleSheet,
@@ -32,13 +32,38 @@ export function AuthScreenLayout({
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
   const safeTop = Platform.OS === 'web' ? authTokens.screen.safeTop : insets.top;
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [footerHeight, setFooterHeight] = useState<number>(
     authTokens.screen.footerHeight,
   );
-  const contentHeight = Math.max(
-    0,
-    height - safeTop - authTokens.screen.headerRowHeight - footerHeight,
-  );
+  const contentHeight = keyboardVisible
+    ? 0
+    : Math.max(
+        0,
+        height - safeTop - authTokens.screen.headerRowHeight - footerHeight,
+      );
+
+  useEffect(() => {
+    if (Platform.OS === 'web') {
+      return;
+    }
+
+    const showEvent =
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvent =
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const showSubscription = Keyboard.addListener(showEvent, () => {
+      setKeyboardVisible(true);
+    });
+    const hideSubscription = Keyboard.addListener(hideEvent, () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const handleFooterLayout = (event: LayoutChangeEvent) => {
     const measured = Math.ceil(event.nativeEvent.layout.height);
@@ -58,23 +83,36 @@ export function AuthScreenLayout({
           sideSlotWidth={44}
         />
       </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={0}
-        style={styles.flex}
-      >
+      <View style={styles.flex}>
         <ScrollView
-          automaticallyAdjustKeyboardInsets
+          automaticallyAdjustKeyboardInsets={Platform.OS === 'ios'}
           bounces={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[
+            styles.scrollContent,
+            keyboardVisible && styles.keyboardScrollContent,
+          ]}
+          keyboardDismissMode={
+            Platform.OS === 'ios' ? 'interactive' : 'on-drag'
+          }
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
           style={styles.flex}
         >
           {children(contentHeight)}
+          {keyboardVisible
+            ? footer({
+                bottomInset: 0,
+                onLayout: handleFooterLayout,
+              })
+            : null}
         </ScrollView>
-        {footer({ bottomInset: insets.bottom, onLayout: handleFooterLayout })}
-      </KeyboardAvoidingView>
+        {!keyboardVisible
+          ? footer({
+              bottomInset: insets.bottom,
+              onLayout: handleFooterLayout,
+            })
+          : null}
+      </View>
     </View>
   );
 }
@@ -90,5 +128,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
+  },
+  keyboardScrollContent: {
+    flexGrow: 0,
   },
 });

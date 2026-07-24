@@ -48,6 +48,20 @@ export const pawlyTokens = {
     },
   },
   component: {
+    footer: {
+      gap: 12,
+      horizontalPadding: 16,
+      minimumBottomPadding: 20,
+      topPadding: 20,
+    },
+    inputField: {
+      borderRadius: 8,
+      borderWidth: 1,
+      gap: 8,
+      horizontalPadding: 16,
+      iconSize: 20,
+      verticalPadding: 12,
+    },
     userAvatar: {
       borderColor: '#ffffff',
       borderWidth: 2,

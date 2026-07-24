@@ -1,0 +1,38 @@
+<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="8" height="8" fill="#E8E8E8"/>
+<g id="Pet Avatar">
+<path d="M-414 -220C-414 -221.105 -413.105 -222 -412 -222H254C255.105 -222 256 -221.105 256 -220V790C256 791.105 255.105 792 254 792H-412C-413.105 792 -414 791.105 -414 790V-220Z" fill="white"/>
+<path d="M-412 -222V-221H254V-222V-223H-412V-222ZM256 -220H255V790H256H257V-220H256ZM254 792V791H-412V792V793H254V792ZM-414 790H-413V-220H-414H-415V790H-414ZM-412 792V791C-412.552 791 -413 790.552 -413 790H-414H-415C-415 791.657 -413.657 793 -412 793V792ZM256 790H255C255 790.552 254.552 791 254 791V792V793C255.657 793 257 791.657 257 790H256ZM254 -222V-221C254.552 -221 255 -220.552 255 -220H256H257C257 -221.657 255.657 -223 254 -223V-222ZM-412 -222V-223C-413.657 -223 -415 -221.657 -415 -220H-414H-413C-413 -220.552 -412.552 -221 -412 -221V-222Z" fill="black" fill-opacity="0.1"/>
+<g id="Pet Avatar_2">
+<rect x="-313.5" y="-71.5" width="469" height="473" rx="4.5" stroke="#8A38F5" stroke-dasharray="10 5"/>
+<g id="Type=default, Size=default, State=default">
+<g id="icon" filter="url(#filter0_d_154_5806)">
+<mask id="path-4-inside-1_154_5806" fill="white">
+<path d="M-8 4C-8 -2.62742 -2.62742 -8 4 -8C10.6274 -8 16 -2.62742 16 4C16 10.6274 10.6274 16 4 16C-2.62742 16 -8 10.6274 -8 4Z"/>
+</mask>
+<path d="M-8 4C-8 -2.62742 -2.62742 -8 4 -8C10.6274 -8 16 -2.62742 16 4C16 10.6274 10.6274 16 4 16C-2.62742 16 -8 10.6274 -8 4Z" fill="#D97757" shape-rendering="crispEdges"/>
+<path d="M-8 4M16 4M16 4M-8 4M4 -8M16 4M4 16M-8 4M4 16V14C-1.52285 14 -6 9.52285 -6 4H-8H-10C-10 11.732 -3.73199 18 4 18V16ZM16 4H14C14 9.52285 9.52285 14 4 14V16V18C11.732 18 18 11.732 18 4H16ZM4 -8V-6C9.52285 -6 14 -1.52285 14 4H16H18C18 -3.73199 11.732 -10 4 -10V-8ZM4 -8V-10C-3.73199 -10 -10 -3.73199 -10 4H-8H-6C-6 -1.52285 -1.52285 -6 4 -6V-8Z" fill="white" mask="url(#path-4-inside-1_154_5806)"/>
+<g id="Line Duotone / Messages, Conversation / Pen" clip-path="url(#clip0_154_5806)">
+<path id="Vector" d="M5.09564 1.05058L4.78668 1.35954L1.94626 4.19996C1.75388 4.39234 1.65768 4.48854 1.57496 4.5946C1.47737 4.71972 1.3937 4.85509 1.32544 4.99833C1.26757 5.11976 1.22455 5.24881 1.13851 5.50693L0.773926 6.60068L0.684806 6.86804C0.642466 6.99506 0.675525 7.1351 0.7702 7.22978C0.864876 7.32445 1.00492 7.35751 1.13194 7.31517L1.3993 7.22605L2.49305 6.86147L2.49307 6.86146C2.75117 6.77543 2.88022 6.73241 3.00165 6.67454C3.14489 6.60628 3.28026 6.52261 3.40538 6.42502C3.51144 6.3423 3.60764 6.2461 3.80002 6.05371L6.64044 3.2133L6.9494 2.90434C7.4613 2.39244 7.4613 1.56248 6.9494 1.05058C6.4375 0.538681 5.60754 0.538681 5.09564 1.05058Z" stroke="white" stroke-width="1.5"/>
+<path id="Vector_2" opacity="0.5" d="M4.78668 1.35953C4.78668 1.35953 4.8253 2.01607 5.4046 2.59537C5.9839 3.17467 6.64044 3.21329 6.64044 3.21329M1.3993 7.22604L0.773926 6.60067" stroke="white" stroke-width="1.5"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_154_5806" x="-10" y="-9" width="28" height="28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1"/>
+<feGaussianBlur stdDeviation="1"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_154_5806"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_154_5806" result="shape"/>
+</filter>
+<clipPath id="clip0_154_5806">
+<rect width="8" height="8" fill="white"/>
+</clipPath>
+</defs>
+</svg>

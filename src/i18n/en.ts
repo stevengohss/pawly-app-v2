@@ -65,6 +65,35 @@ export const en = {
       insight: 'See activity analysis',
     },
   },
+  drawer: {
+    furryFamily: 'Furry Family',
+    addPet: 'Add',
+    agenda: "Today's Agenda",
+    notifications: 'Notifications',
+    settings: 'Settings',
+    signOut: 'Sign Out',
+    profile: {
+      memberType: 'Premium Parent',
+      memberSince: 'Member since 2026',
+    },
+    alerts: {
+      profile: 'Profile editing is not available yet.',
+      pet: 'Pet editing and switching are not available yet.',
+      addPet: 'Adding another pet is not available yet.',
+      agenda: "Today's Agenda is not available yet.",
+      settings: 'Settings are not available yet.',
+      signOutErrorTitle: 'Unable to sign out',
+    },
+    accessibility: {
+      opened: 'Profile and pet drawer opened',
+      close: 'Close profile and pet drawer',
+      profileImage: 'Steven Miller profile image',
+      editProfile: 'Edit Steven Miller profile',
+      editPet: 'Edit pet',
+      addPet: 'Add pet',
+      signOut: 'Sign out of Pawly',
+    },
+  },
   auth: {
     welcome: {
       heading: 'Welcome to Pawly',

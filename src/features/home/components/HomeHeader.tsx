@@ -1,3 +1,4 @@
+import type { Ref } from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import BellBody from '../../../../assets/figma/actions/bell-body.svg';
@@ -13,6 +14,7 @@ import { homeTokens } from '@/theme/homeTokens';
 const homeAvatar = require('../../../../assets/figma/user/home-avatar.jpg');
 
 type HomeHeaderProps = {
+  avatarRef?: Ref<View>;
   onNotifications: () => void;
   onProfile: () => void;
   onSearch: () => void;
@@ -20,6 +22,7 @@ type HomeHeaderProps = {
 };
 
 export function HomeHeader({
+  avatarRef,
   onNotifications,
   onProfile,
   onSearch,
@@ -42,6 +45,7 @@ export function HomeHeader({
             accessibilityRole="button"
             hitSlop={4}
             onPress={onProfile}
+            ref={avatarRef}
             style={({ pressed }) => pressed && styles.pressed}
           >
             <UserAvatar

@@ -19,6 +19,47 @@ export const pawlyTokens = {
     jakartaSemiBold: 'PlusJakartaSans_600SemiBold',
     jakartaBold: 'PlusJakartaSans_700Bold',
   },
+  interaction: {
+    minimumTouchTarget: 44,
+  },
+  shadow: {
+    avatar: {
+      web:
+        '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)',
+      color: '#000000',
+      offset: {
+        width: 0,
+        height: 8,
+      },
+      opacity: 0.1,
+      radius: 7,
+      elevation: 4,
+    },
+    badge: {
+      web: '0 1px 1px rgba(0,0,0,0.05)',
+      color: '#000000',
+      offset: {
+        width: 0,
+        height: 1,
+      },
+      opacity: 0.05,
+      radius: 1,
+      elevation: 1,
+    },
+  },
+  component: {
+    userAvatar: {
+      borderColor: '#ffffff',
+      borderWidth: 2,
+      imagePadding: 2,
+      largeSize: 80,
+      largeRadius: 16,
+      largeBadgeSize: 32,
+      largeBadgeOffset: -8,
+      largeEditIconSize: 14,
+      badgeColor: '#d97757',
+    },
+  },
   screen: {
     width: 402,
     splashHeight: 874,

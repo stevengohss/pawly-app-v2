@@ -1,6 +1,9 @@
 import type { AuthError } from '@supabase/supabase-js';
 
-import type { AuthActionResult } from '@/features/auth/types/auth.types';
+import type {
+  AuthActionResult,
+  SignOutResult,
+} from '@/features/auth/types/auth.types';
 import { en } from '@/i18n/en';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -56,6 +59,20 @@ export async function signUpWithEmail(input: {
   }
 
   return { status: 'confirmation-required' };
+}
+
+export async function signOutCurrentUser(): Promise<SignOutResult> {
+  if (!supabase) {
+    return { status: 'error', message: en.auth.validation.unavailable };
+  }
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    return { status: 'error', message: authErrorMessage(error) };
+  }
+
+  return { status: 'signed-out' };
 }
 
 function authErrorMessage(error: AuthError) {

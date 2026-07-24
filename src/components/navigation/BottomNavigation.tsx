@@ -6,22 +6,18 @@ import {
   Text,
   View,
 } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 import AddAction from '../../../assets/figma/navigation/add-action.svg';
-import BottomNavSurface from '../../../assets/figma/navigation/bottom-nav-surface.svg';
-import CareHand from '../../../assets/figma/navigation/care-icon-hand.svg';
-import CareHeart from '../../../assets/figma/navigation/care-icon-heart.svg';
-import ExploreCircle from '../../../assets/figma/navigation/explore-icon-circle.svg';
-import ExploreNeedle from '../../../assets/figma/navigation/explore-icon-needle.svg';
+import CareActive from '../../../assets/figma/navigation/care-active.svg';
+import CareInactive from '../../../assets/figma/navigation/care-inactive.svg';
+import ExploreActive from '../../../assets/figma/navigation/explore-active.svg';
+import ExploreInactive from '../../../assets/figma/navigation/explore-inactive.svg';
+import HomeActive from '../../../assets/figma/navigation/home-active.svg';
 import HomeIndicator from '../../../assets/figma/navigation/home-active-indicator.svg';
-import HomeBody from '../../../assets/figma/navigation/home-icon-body.svg';
-import HomeDetail from '../../../assets/figma/navigation/home-icon-detail.svg';
-import HomeHighlight from '../../../assets/figma/navigation/home-icon-highlight.svg';
-import HomeRoof from '../../../assets/figma/navigation/home-icon-roof.svg';
-import MomentsDot from '../../../assets/figma/navigation/moments-icon-dot.svg';
-import MomentsFrame from '../../../assets/figma/navigation/moments-icon-frame.svg';
-import MomentsImage from '../../../assets/figma/navigation/moments-icon-image.svg';
-import MomentsTop from '../../../assets/figma/navigation/moments-icon-top.svg';
+import HomeInactive from '../../../assets/figma/navigation/home-inactive.svg';
+import MomentsActive from '../../../assets/figma/navigation/moments-active.svg';
+import MomentsInactive from '../../../assets/figma/navigation/moments-inactive.svg';
 import { pawlyTokens } from '@/theme/pawlyTokens';
 
 export type BottomNavigationDestination =
@@ -31,24 +27,93 @@ export type BottomNavigationDestination =
   | 'care'
   | 'explore';
 
+type BottomNavigationTab = Exclude<BottomNavigationDestination, 'add'>;
+
 type BottomNavigationProps = {
-  activeDestination: Exclude<BottomNavigationDestination, 'add'>;
+  activeDestination: BottomNavigationTab;
   bottomInset: number;
   labels: Record<BottomNavigationDestination, string>;
-  onSelect: (destination: BottomNavigationDestination) => void;
+  onAddPress: () => void;
+  onSelect: (destination: BottomNavigationTab) => void;
 };
 
+type NavigationIcon = ComponentType<SvgProps>;
+
 type NavItemProps = {
-  active?: boolean;
-  icon: ComponentType;
+  active: boolean;
+  activeIcon: NavigationIcon;
+  inactiveIcon: NavigationIcon;
   label: string;
   onPress: () => void;
 };
+
+export const BOTTOM_NAVIGATION_HEIGHT = 107;
+
+const metrics = {
+  add: {
+    artworkOffsetX: -16,
+    artworkOffsetY: -12,
+    artworkSize: 87,
+    frameOffsetFromMenu: -22,
+    frameSize: 55,
+  },
+  item: {
+    activeIconOffset: 4,
+    gap: 4,
+    height: 75,
+    horizontalPadding: 15,
+    iconSize: 24,
+    verticalPadding: 12.5,
+    width: 70,
+  },
+  menu: {
+    groupGap: 8,
+    groupWidth: 148,
+    horizontalPadding: 16,
+    top: 32,
+  },
+  selectedIndicator: {
+    height: 1,
+    top: 11.5,
+    width: 17,
+  },
+  surface: {
+    bottomRadius: 26,
+    bumpSize: 72,
+    height: BOTTOM_NAVIGATION_HEIGHT,
+    rectangleHeight: 75,
+    rectangleTop: 32,
+    topRadius: 6,
+  },
+} as const;
+
+const navigationItems = {
+  home: {
+    activeIcon: HomeActive,
+    inactiveIcon: HomeInactive,
+  },
+  moments: {
+    activeIcon: MomentsActive,
+    inactiveIcon: MomentsInactive,
+  },
+  care: {
+    activeIcon: CareActive,
+    inactiveIcon: CareInactive,
+  },
+  explore: {
+    activeIcon: ExploreActive,
+    inactiveIcon: ExploreInactive,
+  },
+} satisfies Record<
+  BottomNavigationTab,
+  { activeIcon: NavigationIcon; inactiveIcon: NavigationIcon }
+>;
 
 export function BottomNavigation({
   activeDestination,
   bottomInset,
   labels,
+  onAddPress,
   onSelect,
 }: BottomNavigationProps) {
   const safeBottom = Math.max(0, bottomInset);
@@ -56,40 +121,45 @@ export function BottomNavigation({
   return (
     <View
       accessibilityRole="tablist"
-      style={[styles.container, { height: 107 + safeBottom }]}
+      style={[
+        styles.container,
+        {
+          height: BOTTOM_NAVIGATION_HEIGHT + safeBottom,
+        },
+      ]}
     >
-      <View style={styles.shadowSurface}>
-        <BottomNavSurface height={107} width="100%" />
-      </View>
-      {safeBottom > 0 ? (
-        <View style={[styles.safeAreaFill, { height: safeBottom }]} />
-      ) : null}
+      <NavigationSurface safeBottom={safeBottom} />
 
       <View style={styles.menuRow}>
         <View style={styles.group}>
           <NavItem
             active={activeDestination === 'home'}
-            icon={HomeNavigationIcon}
+            activeIcon={navigationItems.home.activeIcon}
+            inactiveIcon={navigationItems.home.inactiveIcon}
             label={labels.home}
             onPress={() => onSelect('home')}
           />
           <NavItem
             active={activeDestination === 'moments'}
-            icon={MomentsNavigationIcon}
+            activeIcon={navigationItems.moments.activeIcon}
+            inactiveIcon={navigationItems.moments.inactiveIcon}
             label={labels.moments}
             onPress={() => onSelect('moments')}
           />
         </View>
+
         <View style={styles.group}>
           <NavItem
             active={activeDestination === 'care'}
-            icon={CareNavigationIcon}
+            activeIcon={navigationItems.care.activeIcon}
+            inactiveIcon={navigationItems.care.inactiveIcon}
             label={labels.care}
             onPress={() => onSelect('care')}
           />
           <NavItem
             active={activeDestination === 'explore'}
-            icon={ExploreNavigationIcon}
+            activeIcon={navigationItems.explore.activeIcon}
+            inactiveIcon={navigationItems.explore.inactiveIcon}
             label={labels.explore}
             onPress={() => onSelect('explore')}
           />
@@ -99,29 +169,54 @@ export function BottomNavigation({
       <Pressable
         accessibilityLabel={labels.add}
         accessibilityRole="button"
-        onPress={() => onSelect('add')}
+        hitSlop={8}
+        onPress={onAddPress}
         style={({ pressed }) => [
           styles.addButton,
           pressed && styles.pressed,
         ]}
       >
-        <AddAction height={87} width={87} />
+        <AddAction
+          height={metrics.add.artworkSize}
+          style={styles.addArtwork}
+          width={metrics.add.artworkSize}
+        />
       </Pressable>
     </View>
   );
 }
 
+function NavigationSurface({ safeBottom }: { safeBottom: number }) {
+  return (
+    <>
+      <View pointerEvents="none" style={styles.shadowSurface}>
+        <View style={styles.surfaceBump} />
+        <View style={styles.surfaceRectangle} />
+      </View>
+      {safeBottom > 0 ? (
+        <View
+          pointerEvents="none"
+          style={[styles.safeAreaSurface, { height: safeBottom }]}
+        />
+      ) : null}
+    </>
+  );
+}
+
 function NavItem({
   active,
-  icon: Icon,
+  activeIcon: ActiveIcon,
+  inactiveIcon: InactiveIcon,
   label,
   onPress,
 }: NavItemProps) {
+  const Icon = active ? ActiveIcon : InactiveIcon;
+
   return (
     <Pressable
       accessibilityLabel={label}
       accessibilityRole="tab"
-      accessibilityState={{ selected: Boolean(active) }}
+      accessibilityState={{ selected: active }}
       onPress={onPress}
       style={({ pressed }) => [
         styles.item,
@@ -130,11 +225,17 @@ function NavItem({
     >
       {active ? (
         <View style={styles.indicator}>
-          <HomeIndicator height={1} width={17} />
+          <HomeIndicator
+            height={metrics.selectedIndicator.height}
+            width={metrics.selectedIndicator.width}
+          />
         </View>
       ) : null}
       <View style={[styles.icon, active && styles.activeIcon]}>
-        <Icon />
+        <Icon
+          height={metrics.item.iconSize}
+          width={metrics.item.iconSize}
+        />
       </View>
       <Text style={[styles.label, active && styles.activeLabel]}>
         {label}
@@ -143,151 +244,99 @@ function NavItem({
   );
 }
 
-function HomeNavigationIcon() {
-  return (
-    <View style={styles.iconCanvas}>
-      <HomeRoof height={19.658} style={styles.homeRoof} width={21.5} />
-      <HomeDetail height={2.5} style={styles.homeDetail} width={2.5} />
-      <HomeBody height={8} style={styles.homeBody} width={7.5} />
-      <HomeHighlight
-        height={4.64}
-        style={styles.homeHighlight}
-        width={3.5}
-      />
-    </View>
-  );
-}
-
-function MomentsNavigationIcon() {
-  return (
-    <View style={styles.iconCanvas}>
-      <MomentsFrame
-        height={17.5}
-        style={styles.momentsFrame}
-        width={21.5}
-      />
-      <MomentsTop
-        height={3.84}
-        style={styles.momentsTop}
-        width={17.339}
-      />
-      <MomentsDot
-        height={4.5}
-        style={styles.momentsDot}
-        width={4.5}
-      />
-      <MomentsImage
-        height={9.602}
-        style={styles.momentsImage}
-        width={20.5}
-      />
-    </View>
-  );
-}
-
-function CareNavigationIcon() {
-  return (
-    <View style={styles.iconCanvas}>
-      <CareHeart
-        height={9.177}
-        style={styles.careHeart}
-        width={11.5}
-      />
-      <CareHand height={8.5} style={styles.careHand} width={18.502} />
-    </View>
-  );
-}
-
-function ExploreNavigationIcon() {
-  return (
-    <View style={styles.iconCanvas}>
-      <ExploreCircle
-        height={21.5}
-        style={styles.exploreCircle}
-        width={21.5}
-      />
-      <ExploreNeedle
-        height={8.842}
-        style={styles.exploreNeedle}
-        width={8.842}
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    maxWidth: 402,
+    overflow: 'visible',
   },
   shadowSurface: {
     position: 'absolute',
     top: 0,
     right: 0,
     left: 0,
-    height: 107,
+    height: metrics.surface.height,
     ...Platform.select({
       web: {
-        filter: 'drop-shadow(0 -1px 32px rgba(0,0,0,0.15))',
+        filter: 'drop-shadow(0 -1px 64px rgba(0,0,0,0.15))',
       },
       default: {
         shadowColor: '#000000',
         shadowOffset: { width: 0, height: -1 },
         shadowOpacity: 0.15,
-        shadowRadius: 32,
+        shadowRadius: 64,
         elevation: 16,
       },
     }),
   },
-  safeAreaFill: {
+  surfaceRectangle: {
     position: 'absolute',
+    top: metrics.surface.rectangleTop,
     right: 0,
-    bottom: 0,
+    left: 0,
+    height: metrics.surface.rectangleHeight,
+    borderTopLeftRadius: metrics.surface.topRadius,
+    borderTopRightRadius: metrics.surface.topRadius,
+    borderBottomLeftRadius: metrics.surface.bottomRadius,
+    borderBottomRightRadius: metrics.surface.bottomRadius,
+    backgroundColor: '#ffffff',
+  },
+  surfaceBump: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    width: metrics.surface.bumpSize,
+    height: metrics.surface.bumpSize,
+    marginLeft: -(metrics.surface.bumpSize / 2),
+    borderRadius: metrics.surface.bumpSize / 2,
+    backgroundColor: '#ffffff',
+  },
+  safeAreaSurface: {
+    position: 'absolute',
+    top: BOTTOM_NAVIGATION_HEIGHT,
+    right: 0,
     left: 0,
     backgroundColor: '#ffffff',
   },
   menuRow: {
     position: 'absolute',
-    top: 32,
+    top: metrics.menu.top,
     right: 0,
     left: 0,
-    height: 75,
+    height: metrics.item.height,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: metrics.menu.horizontalPadding,
   },
   group: {
+    width: metrics.menu.groupWidth,
+    height: metrics.item.height,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    gap: 8,
+    gap: metrics.menu.groupGap,
   },
   item: {
-    width: 70,
-    height: 75,
+    width: metrics.item.width,
+    height: metrics.item.height,
     alignItems: 'center',
-    paddingVertical: 12.5,
+    paddingHorizontal: metrics.item.horizontalPadding,
+    paddingVertical: metrics.item.verticalPadding,
   },
   indicator: {
     position: 'absolute',
-    top: 11.5,
-    width: 17,
-    height: 1,
+    top: metrics.selectedIndicator.top,
+    width: metrics.selectedIndicator.width,
+    height: metrics.selectedIndicator.height,
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: metrics.item.iconSize,
+    height: metrics.item.iconSize,
   },
   activeIcon: {
-    marginTop: 4,
-  },
-  iconCanvas: {
-    position: 'relative',
-    width: 24,
-    height: 24,
+    marginTop: metrics.item.activeIconOffset,
   },
   label: {
-    marginTop: 4,
+    marginTop: metrics.item.gap,
     color: pawlyTokens.color.caption,
     fontFamily: pawlyTokens.font.jakartaSemiBold,
     fontSize: 12,
@@ -301,25 +350,21 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    top: -34,
+    top:
+      metrics.menu.top +
+      metrics.add.frameOffsetFromMenu,
     left: '50%',
-    width: 87,
-    height: 87,
-    marginLeft: -43,
+    width: metrics.add.frameSize,
+    height: metrics.add.frameSize,
+    marginLeft: -(metrics.add.frameSize / 2),
+    overflow: 'visible',
+  },
+  addArtwork: {
+    position: 'absolute',
+    top: metrics.add.artworkOffsetY,
+    left: metrics.add.artworkOffsetX,
   },
   pressed: {
     opacity: 0.65,
   },
-  homeRoof: { position: 'absolute', top: 3.092, left: 1.25 },
-  homeDetail: { position: 'absolute', top: 8.251, left: 10.75 },
-  homeBody: { position: 'absolute', top: 13.251, left: 8.25 },
-  homeHighlight: { position: 'absolute', top: 3, left: 15.5 },
-  momentsFrame: { position: 'absolute', top: 4.688, left: 1.25 },
-  momentsTop: { position: 'absolute', top: 2.25, left: 3.331 },
-  momentsDot: { position: 'absolute', top: 8.438, left: 16 },
-  momentsImage: { position: 'absolute', top: 11.835, left: 1.25 },
-  careHeart: { position: 'absolute', top: 2, left: 6.25 },
-  careHand: { position: 'absolute', top: 15, left: 4 },
-  exploreCircle: { position: 'absolute', top: 1.25, left: 1.25 },
-  exploreNeedle: { position: 'absolute', top: 8.328, left: 8.33 },
 });

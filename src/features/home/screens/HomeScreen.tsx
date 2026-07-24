@@ -19,6 +19,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
+  BOTTOM_NAVIGATION_HEIGHT,
   BottomNavigation,
   type BottomNavigationDestination,
 } from '@/components/navigation/BottomNavigation';
@@ -40,7 +41,7 @@ export function HomeScreen() {
   const safeBottom = Platform.OS === 'web' ? 0 : insets.bottom;
   const headerHeight = safeTop + homeTokens.screen.headerRowHeight;
   const navigationHeight =
-    homeTokens.screen.bottomNavigationHeight + safeBottom;
+    BOTTOM_NAVIGATION_HEIGHT + safeBottom;
   const scrollRef = useRef<ScrollView>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -174,6 +175,7 @@ export function HomeScreen() {
           activeDestination="home"
           bottomInset={safeBottom}
           labels={en.home.navigation}
+          onAddPress={() => handleNavigation('add')}
           onSelect={handleNavigation}
         />
       </Animated.View>
